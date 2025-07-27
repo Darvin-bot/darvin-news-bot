@@ -2,7 +2,6 @@ import requests, feedparser, os
 from datetime import datetime
 from bs4 import BeautifulSoup
 
-        env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
