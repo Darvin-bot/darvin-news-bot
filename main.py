@@ -2,8 +2,10 @@ import requests, feedparser, os
 from datetime import datetime
 from bs4 import BeautifulSoup
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
 NY_TIME_NOW = datetime.utcnow().timestamp() - 4 * 3600
 
 KEYWORDS = [
