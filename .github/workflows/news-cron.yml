@@ -1,12 +1,12 @@
-name: news-cron
+name: Run news bot
 
 on:
   schedule:
-    - cron: "0 10,13,18 * * 1-5"  # Запуск в 13:00, 16:00 и 21:00 МСК
-  workflow_dispatch:  # разрешает ручной запуск
+    - cron: '0 13,18 * * 1-5'  # Every weekday at 13:00 and 18:00 UTC (16:00 и 21:00 МСК)
+  workflow_dispatch:
 
 jobs:
-  run-news-bots:
+  run-news-bot:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -14,19 +14,17 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
 
-      - name: Run filtered news bot (main.py)
+      - name: Run script
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python main.py
-
-      - name: Run raw news bot (raw_main.py)
-        env:
-          RAW_TELEGRAM_BOT_TOKEN: ${{ secrets.RAW_TELEGRAM_BOT_TOKEN }}
-          RAW_TELEGRAM_CHAT_ID: ${{ secrets.RAW_TELEGRAM_CHAT_ID }}
-        run: python raw_main.py
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHANNEL_ID_1: ${{ secrets.CHANNEL_ID_1 }}
+          CHANNEL_ID_2: ${{ secrets.CHANNEL_ID_2 }}
+          PROXY: ${{ secrets.PROXY }}
+        run: |
+          python bot.py
