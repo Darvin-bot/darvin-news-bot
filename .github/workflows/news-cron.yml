@@ -2,8 +2,8 @@ name: news-cron
 
 on:
   schedule:
-    - cron: "0 10,13,18 * * 1-5"  # 13:00, 16:00, 21:00 по МСК (UTC+3), Пн–Пт
-  workflow_dispatch:  # позволяет запускать вручную
+    - cron: "0 10,13,16,18 * * 1-5"  # 10:00, 13:00, 16:00, 18:00 МСК (07:00, 10:00, 13:00, 15:00 UTC)
+  workflow_dispatch:
 
 jobs:
   run-news-bots:
@@ -27,6 +27,6 @@ jobs:
 
       - name: Run raw news bot (raw_main.py)
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          RAW_TELEGRAM_BOT_TOKEN: ${{ secrets.RAW_TELEGRAM_BOT_TOKEN }}
           RAW_TELEGRAM_CHAT_ID: ${{ secrets.RAW_TELEGRAM_CHAT_ID }}
         run: python raw_main.py
