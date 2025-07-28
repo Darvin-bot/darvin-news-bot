@@ -23,4 +23,3 @@ jobs:
 
     - name: Run news bot
       run: python darvin_auto_news/main.py
-
