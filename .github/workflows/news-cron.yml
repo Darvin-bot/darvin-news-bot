@@ -2,8 +2,8 @@ name: news-cron
 
 on:
   schedule:
-    - cron: "0 10,13,18 * * 1-5"  # 13:00,16:00,21:00 МСК (UTC:10,13,18)
-  workflow_dispatch: # Trigger reindex
+    - cron: "0 10,13,18 * * 1-5"  # Запуск в 13:00, 16:00 и 21:00 МСК
+  workflow_dispatch:  # разрешает ручной запуск
 
 jobs:
   run-news-bots:
