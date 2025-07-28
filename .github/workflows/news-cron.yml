@@ -2,7 +2,7 @@ name: news-cron
 
 on:
   schedule:
-    - cron: "0 10,13,16,18 * * 1-5"  # 10:00, 13:00, 16:00, 18:00 МСК (07:00, 10:00, 13:00, 15:00 UTC)
+    - cron: "0 10,13,18 * * 1-5"  # 13:00,16:00,21:00 МСК (UTC:10,13,18)
   workflow_dispatch:
 
 jobs:
@@ -17,16 +17,16 @@ jobs:
           python-version: "3.10"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r darvin_auto_news/requirements.txt
 
       - name: Run filtered news bot (main.py)
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python main.py
+        run: python darvin_auto_news/main.py
 
       - name: Run raw news bot (raw_main.py)
         env:
-          RAW_TELEGRAM_BOT_TOKEN: ${{ secrets.RAW_TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           RAW_TELEGRAM_CHAT_ID: ${{ secrets.RAW_TELEGRAM_CHAT_ID }}
-        run: python raw_main.py
+        run: python darvin_auto_news/raw_main.py
